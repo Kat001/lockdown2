@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from django.contrib import messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'jm%46&3pl7!++1%ysvwk%c907mhvdtb6_4+@+h8z-1=!lis_=k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'Accounts',
+    'profile_app',
+    'paymentgateway',
+    'home',
+
+    'admin_panel',
+    'api',
+
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -50,6 +62,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'omg.urls'
+AUTH_USER_MODEL = 'Accounts.Account'
 
 TEMPLATES = [
     {
@@ -105,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Calcutta'
 
 USE_I18N = True
 
@@ -117,4 +130,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.1/howto/static-files/
+
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
+
+
+# AWS_ACCESS_KEY_ID = 'AKIATPO6RTRMFZMKNFX5'
+# AWS_SECRET_ACCESS_KEY = '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'
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_STORAGE_BUCKET_NAME = 'uploadvideosfromfaculties'
+# AWS_S3_REGION_NAME = 'us-west-2'
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAULT_A
