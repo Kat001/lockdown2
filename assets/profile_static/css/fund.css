@@ -1,0 +1,50 @@
+#customers {
+  			font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  			border-collapse: collapse;
+ 			 width: 100%;
+
+		}
+
+#customers td, #customers th {
+  			border: 1px solid #ddd;
+  			padding: 8px;
+		}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  		padding-top: 12px;
+  		padding-bottom: 12px;
+  		text-align: left;
+  		background-color: #4CAF50;
+  		color: white;
+	}
+
+
+
+  /*  <div id="content" class="p-4 p-md-5 pt-5">
+  <div id="formdiv">
+    <form method="post">
+        {% csrf_token %}<br>
+        {{form.user_name.label}}<br>
+        {{form.user_name}}<br>
+        {{form.date.label}}<br>
+        {{form.date}}<br>
+        {{form.fund.label}}<br>
+        {{form.fund}}<br>
+        {{form.transection_no.label}}<br>
+        {{form.transection_no}}<br>
+        {{form.proof.label}}<br>
+        {{form.proof}}
+        <button type="submit" class="btn btn-success">Submit Request</button>
+    </form>
+  </div>
+
+  <select id="country" name="country">
+    <option value="australia">Australia</option>
+    <option value="canada">Canada</option>
+    <option value="usa">USA</option>
+  </select>
+*/
