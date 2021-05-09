@@ -1,0 +1,224 @@
+{% extends "profile_templates/base.html" %}
+
+
+
+{% block styles %}
+{% load static %}
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    input[type=text],
+    input[type=Number],
+    input[type=Password] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+
+    label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+    }
+
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+        margin-top: 20px;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    .container {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    .col-25 {
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+    }
+
+    .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+
+        .col-25,
+        .col-75,
+        input[type=submit] {
+            width: 100%;
+            margin-top: 0;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        input[type=submit] {
+            width: 100%;
+            margin-top: 30px;
+        }
+    }
+</style>
+
+<link rel="stylesheet" type="text/css" href="{% static 'profile_static/css/fund.css' %}">
+
+
+{% endblock styles %}
+
+
+
+{% block content %}
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Update Kyc</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">User Profile</a></li>
+                    <li class="breadcrumb-item active">Update Kyc</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="col-lg-12">
+
+    <!-- Credit or Debit Cards  -->
+    <div class="infoItems bg-offwhite">
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">Account holder name:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="name" value="{{bank_obj.account_holder_name}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="lname">Account number:</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" name="number" value="{{bank_obj.account_number}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="subject">Ifsc code:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="ifsc" value="{{bank_obj.ifsc_code}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="country">Branch name:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="branch" value="{{bank_obj.branch_name}}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="subject">Bank name:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="bank" value="{{bank_obj.bank_name}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="subject">Nominee name:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="nominee" value="{{bank_obj.nominee_name}}">
+                </div>
+            </div>
+            <!--	<div class="row">
+			<div class="col-25">
+				<label for="subject">Aadhar number:</label>
+			</div>
+			<div class="col-75">
+				<input type="text" name="aadhar" value="{{bank_obj.aadhar_number}}">
+			</div>
+		</div> -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="subject">Pan number:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="pan" value="{{bank_obj.pan_number}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="subject">Transection password:</label>
+                </div>
+                <div class="col-75">
+                    <input type="password" value="" name='txn_pass' required>
+                </div>
+            </div>
+            <!--	<div class="row">
+			<div class="col-25">
+				<label for="subject">Aadhar Image:</label>
+			</div>
+			<div class="col-75">
+				      <input type="file"  id="inputFile1" name="myfile1" autocomplete="false" default="#" required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-25">
+				<label for="subject">Pan Image:</label>
+			</div>
+			<div class="col-75">
+				      <input type="file"  id="inputFile2" name="myfile2" autocomplete="false" value="{{bank_obj.pan_image}}" required>
+            </div> -->
+            <div class="row">
+                <input type="submit" value="Submit">
+            </div>
+    </div>
+
+
+    </form>
+</div>
+
+{% endblock content %}
