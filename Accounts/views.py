@@ -23,7 +23,7 @@ def signup(request):
         email = request.POST.get('email')
         pass1 = request.POST.get('pass1')
         pass2 = request.POST.get('pass2')
-        fname = request.POST.get('fName')
+        fName = request.POST.get('fName')
         lName = request.POST.get('lName')
         
 
@@ -35,7 +35,7 @@ def signup(request):
                 spn_obj = Account.objects.get(username=sponsor)
                 while True:
                     rand_num = random.randint(500000,599999)
-                    u_name = 'FI' + str(rand_num)
+                    u_name = 'LDM' + str(rand_num)
                     if Account.objects.filter(username=u_name).exists():
                         pass
                     else:
