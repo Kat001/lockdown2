@@ -24,7 +24,13 @@ from Accounts.models import Account
 # Create your views here.
 @login_required
 def profile(request):
-    return render(request,'profile_templates/profile.html')
+    user = request.user
+    date_joined = str(user.date_joined)[0:10]
+    d = {
+        'user':user,
+        'date_joined':date_joined
+    }
+    return render(request,'profile_templates/profile.html',d)
 
 def personalInfo(request):
     user = request.user
@@ -165,7 +171,7 @@ def activate(request):
                         totalProfit = 0
                         percent10 = 0
                         
-                        if int(price) == 500:
+                        if int(price) == 50:
                             totalProfit = 1000
                             percent10 = 50
 

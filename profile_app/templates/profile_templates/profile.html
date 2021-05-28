@@ -35,9 +35,9 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h5>{{user.total_level_income}} Trx</h5>
 
-                        <p>New Orders</p>
+                        <p>Total Level Income</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
@@ -50,9 +50,9 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+                        <h5>{{user.total_roi_income}} Trx<sup style="font-size: 20px"></sup></h5>
 
-                        <p>Bounce Rate</p>
+                        <p>Total Roi Income</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -65,9 +65,9 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h5>{{date_joined}}</h5>
 
-                        <p>User Registrations</p>
+                        <p>User Registration Date</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
@@ -80,21 +80,98 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
+                        <h5>{{user.activation_amount}} Trx</h5>
 
-                        <p>Unique Visitors</p>
+                        <p>My Package</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">My Package <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h5>100 Trx</h5>
+
+                        <p>Total Withdrawal</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h5>{{user.refund}} Trx<sup style="font-size: 20px"></sup></h5>
+
+                        <p>Available Balance</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <!-- ./col -->
         </div>
-        <!-- /.row -->
+        <!-- /.row --><br>
+        <!-- <div class="shadow p-3 mb-5 bg-white rounded">Regular shadow</div> -->
 
 
+
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" value="http:/devil.com/{{user.username}}"
+                placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2"
+                readonly>
+            <div class="input-group-append">
+                <button type="button" class="btn btn-success">Copy Link</button>
+            </div>
+        </div><br><br>
+        <footer class="text-center text-white" style="background-color: #f1f1f1;">
+            <!-- Grid container -->
+            <div class="container pt-4">
+                <!-- Section: Social media -->
+                <section class="mb-4">
+                    <!-- Facebook -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                        data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+
+                    <!-- Twitter -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                        data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+
+                    <!-- Google -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                        data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+
+                    <!-- Instagram -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                        data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+
+
+                </section>
+                <!-- Section: Social media -->
+            </div>
+            <!-- Grid container -->
+
+            <!-- Copyright -->
+            <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2020 Copyright:
+                <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
 
 </section>
 <!-- right col -->
@@ -102,5 +179,4 @@
 <!-- /.row (main row) -->
 </div><!-- /.container-fluid -->
 </section>
-
 {% endblock content %}

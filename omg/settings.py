@@ -32,12 +32,13 @@ INSTALLED_APPS = [
 
     'Accounts',
     'profile_app',
+    'payment',
+    'django_coinpayments',
     'paymentgateway',
     'home',
 
     'admin_panel',
-    'api',
-
+ 
     'rest_framework'
 ]
 
@@ -56,6 +57,11 @@ ROOT_URLCONF = 'omg.urls'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 AUTH_USER_MODEL = 'Accounts.Account'
+
+COINPAYMENTS_API_KEY = '4b4f7c51d0583384f082cc6894b40149063f17036da52bd7b7965a18fc53e89d'
+COINPAYMENTS_API_SECRET = 'b33162fc07f678eaB1d9aab22e5dc739eDb8a5030a0748e58bd7763F604cA4bd'
+
+
 
 TEMPLATES = [
     {
@@ -85,6 +91,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': "dev",
+#         'USER': "postgres",
+#         'PASSWORD': "2012",
+#         'HOST' : 'localhost',
+#         'PORT' : '5433'
+#     }
+# }
 
 
 # Password validation
