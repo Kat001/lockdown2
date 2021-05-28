@@ -56,40 +56,38 @@ class Command(BaseCommand):
             for package in packages:
                 # Day1 Income...................
                 if package.day1:
-                    roi_obj = AllRoiIncome(user = package.user,amount = package.percent10, package_amount = package.amount)
+                    roi_obj = AllRoiIncome(user = package.user,amount = ((package.amount*10)/100), package_amount = package.amount)
                     package.day1 = False
-                    package.total_income += package.percent10
+                    package.days -= 1
+                    package.total_income += ((package.amount*10)/100)
                     package.save()
                     roi_obj.save()
-                    self.send_roi_on_roi(roi_obj)
+                    # self.send_roi_on_roi(roi_obj)
                 
                 else:
                     # Income If User has not Withdrawaled any money
                     if package.is_withdrawal == False:
-                        if package.total_income < package.profit:
+                        if package.days > 0:
                             income = (package.total_income*10)/100
-                            if((income + package.total_income) >= package.profit):
-                                income = package.profit - package.total_income
-
                             roi_obj = AllRoiIncome(user = package.user,amount = income, package_amount = package.amount)
                             package.total_income += income
+                            package.days -= 1
                             package.save()
                             roi_obj.save()
-                            self.send_roi_on_roi(roi_obj)
+                            # self.send_roi_on_roi(roi_obj)
 
                         else:
                             pass
                     else:
                         # Income after first Withdarawl..............
-                        if package.total_income < package.profit:
+                        if package.days > 0:
                             income = (package.amount*1)/100
-                            if((income + package.total_income) > package.profit):
-                                income = package.profit - package.total_income
                             roi_obj = AllRoiIncome(user = package.user,amount = income, package_amount = package.amount)
                             package.total_income += income
+                            package.days -= 1
                             package.save()
                             roi_obj.save()
-                            self.send_roi_on_roi(roi_obj)
+                            # self.send_roi_on_roi(roi_obj)
                         else:
                             pass
             

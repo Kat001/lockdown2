@@ -25,7 +25,7 @@ class LevelIncome(models.Model):
     activated_user 	= models.ForeignKey(Account,on_delete=models.CASCADE,related_name="activated_iid")
     date 	= models.DateField(auto_now_add=True)
     level  = models.CharField(max_length=10,default="")
-    amount 	= models.IntegerField(default=0)
+    amount 	= models.FloatField(default=0)
 
     def __str__(self):
         return self.user.username
@@ -49,6 +49,7 @@ class PurchasedPackages(models.Model):
     total_income = models.FloatField(default=0)
     day1 = models.BooleanField(default=True)
     is_withdrawal = models.BooleanField(default=False)
+    days = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.user.username
@@ -106,6 +107,15 @@ class book(models.Model):
 
     def __str__(self):
         return self.name
+
+class Withdrawal(models.Model):
+    user = models.ForeignKey(Account,on_delete=models.CASCADE)
+    amount = models.FloatField(default=0)
+    date = models.DateField(auto_now_add=True)
+    status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return user.username
 
 
 

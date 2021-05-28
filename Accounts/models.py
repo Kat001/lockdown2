@@ -43,6 +43,7 @@ class Account(AbstractBaseUser):
 	is_staff				= models.BooleanField(default=False)
 	is_superuser			= models.BooleanField(default=False)
 	total_level_income      = models.FloatField(default=0)
+	withdrawal_amount       = models.FloatField(default=0)
 	total_roi_income        = models.FloatField(default=0)
 	total_direct_income     = models.FloatField(default=0)
 	activation_amount       = models.FloatField(default=0)

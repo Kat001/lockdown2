@@ -172,38 +172,25 @@ def activate(request):
                         percent10 = 0
                         
                         if int(price) == 50:
-                            totalProfit = 1000
-                            percent10 = 50
+                            days = 150
+
+                        elif int(price) == 100:
+                            days = 150
+
+                        elif int(price) == 500:
+                            days = 170
 
                         elif int(price) == 1000:
-                            totalProfit = 2000
-                            percent10 = 100
-
-                        elif int(price) == 2000:
-                            totalProfit = 4200
-                            percent10 = 200
+                            days = 170
 
                         elif int(price) == 5000:
-                            totalProfit = 11250
-                            percent10 = 500
+                            days = 200
 
                         elif int(price) == 10000:
-                            totalProfit = 25000
-                            percent10 = 1000
+                            days = 200
 
-                        elif int(price) == 25000:
-                            totalProfit = 68750
-                            percent10 = 2500
 
-                        elif int(price) == 50000:
-                            totalProfit = 150000
-                            percent10 = 5000
-
-                        elif int(price) == 100000:
-                            totalProfit = 300000
-                            percent10 = 10000
-
-                        purchasedpackages = PurchasedPackages(user = activated_obj,amount = int(price),profit=totalProfit,percent10= percent10)
+                        purchasedpackages = PurchasedPackages(user = activated_obj,amount = int(price),days = days)
                         purchasedpackages.save()
 
                         # Assign Level Income................
@@ -213,7 +200,7 @@ def activate(request):
                             obj = obj.sponsor
                             if obj.is_active1:
                                 if i==5:
-                                    income = (int(price)*5/100)
+                                    income = (int(price)*10/100)
                                     obj.total_level_income += income
                                     obj.refund += income
                                     levelIncome_obj = LevelIncome(user = obj,level='1',amount=income,activated_user=activated_obj)

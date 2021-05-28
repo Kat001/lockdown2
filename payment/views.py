@@ -10,11 +10,14 @@ import requests
 import json
 
 from coinpayments import CoinPaymentsAPI
+from django.contrib import messages
+
 
 from json import dumps
 import time
 from Accounts.models import Account
 from profile_app.models import Fund
+from profile_app.models import Withdrawal
 
 
 import ssl
@@ -183,14 +186,42 @@ def cheak(request):
 
 
 def success(request):
-    # user_obj = request.user
-    # amount = request.session['amount']
+    user_obj = request.user
+    amount = request.session['amount']
    
-    # try:
+    try:
         
-    #     fund_obj = Fund.objects.get(user = user_obj)
-    #     fund_obj.available_fund += float(amount)
-    #     fund_obj.save()
-    # except Exception as e:
-    #     pass
+        fund_obj = Fund.objects.get(user = user_obj)
+        fund_obj.available_fund += float(amount)
+        fund_obj.save()
+    except Exception as e:
+        pass
     return render(request, 'home_templates/success.html')
+
+def withdrawal(request):
+    user = request.user
+    try:
+        if request.method == 'POST':
+            walletAddress = request.POST.get('walletAddress')
+            amount = request.POST.get('amount')
+            password = request.POST.get('password')
+            u_txn = user.txn_password
+            if password == u_txn:
+                api = CoinPaymentsAPI(public_key='4b4f7c51d0583384f082cc6894b40149063f17036da52bd7b7965a18fc53e89d',
+                      private_key='b33162fc07f678eaB1d9aab22e5dc739eDb8a5030a0748e58bd7763F604cA4bd')
+    
+                # res = api.create_withdrawal(amount=amount,currency="TRX",address=walletAddress)
+                # print(res)
+            else:
+                print("this is callled")
+                messages.error(request,'Wrong transection password!!')
+                return redirect('withdrawal')
+    except Exception as e:
+        pass
+    # user = request.user
+    # api = CoinPaymentsAPI(public_key='4b4f7c51d0583384f082cc6894b40149063f17036da52bd7b7965a18fc53e89d',
+    #                       private_key='b33162fc07f678eaB1d9aab22e5dc739eDb8a5030a0748e58bd7763F604cA4bd')
+    
+    # res = api.create_withdrawal(amount=2,currency="TRX",address="TLcdvQ48Jk1SueBqiqzkZ6YrRd3RMdqzMY")
+    # print(res)
+    return render(request,'home_templates/withdrawal.html')
