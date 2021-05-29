@@ -131,7 +131,7 @@
 
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" value="http:/devil.com/{{user.username}}"
+            <input type="text" class="form-control" value="{{ request.META.HTTP_HOST }}/{{user.username}}"
                 placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2"
                 readonly>
             <div class="input-group-append">
@@ -168,7 +168,7 @@
             <!-- Copyright -->
             <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
                 © 2020 Copyright:
-                <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+                <a class="text-dark" href="https://mdbootstrap.com/">Finderinternational.world</a>
             </div>
             <!-- Copyright -->
         </footer>

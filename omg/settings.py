@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'gunicorn',
 
     'Accounts',
@@ -57,6 +58,8 @@ ROOT_URLCONF = 'omg.urls'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 AUTH_USER_MODEL = 'Accounts.Account'
+
+SITE_ID = 1
 
 COINPAYMENTS_API_KEY = '4b4f7c51d0583384f082cc6894b40149063f17036da52bd7b7965a18fc53e89d'
 COINPAYMENTS_API_SECRET = 'b33162fc07f678eaB1d9aab22e5dc739eDb8a5030a0748e58bd7763F604cA4bd'
@@ -91,6 +94,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # DATABASES = {
 #     'default': {

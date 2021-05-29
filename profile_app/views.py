@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password,check_password
 
+from django.contrib.sites.models import Site
 
 from django.contrib import messages
 import datetime
@@ -26,6 +27,9 @@ from Accounts.models import Account
 def profile(request):
     user = request.user
     date_joined = str(user.date_joined)[0:10]
+    current_site = Site.objects.get_current()
+    print("Domain---->>",current_site.domain)
+    print(request.META['HTTP_HOST'])
     d = {
         'user':user,
         'date_joined':date_joined
