@@ -212,7 +212,7 @@ def withdrawal(request):
                       private_key='b33162fc07f678eaB1d9aab22e5dc739eDb8a5030a0748e58bd7763F604cA4bd')
                     res = api.create_withdrawal(amount=amount,currency="TRX",address=walletAddress)
                     if res['error'] == 'ok':
-                        withdrawal = Withdrawal(user = user,amount=amount)
+                        withdrawal = Withdrawal(user = user,amount=amount,address=walletAddress)
                         withdrawal.save()
                         messages.success(request,'your withdrawal created successfully!!')
                         return redirect('withdrawal')
