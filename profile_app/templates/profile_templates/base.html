@@ -21,6 +21,7 @@
 
     {% endblock styles %}
 
+
 </head>
 <!--
 `body` tag options:
@@ -449,6 +450,7 @@
 
                 {% block content %}
                 {% endblock content %}
+
             </div>
             <!-- /.content-wrapper -->
 
@@ -471,6 +473,9 @@
 
         <!-- REQUIRED SCRIPTS -->
 
+        {% block js %}
+
+        {% endblock js %}
         <!-- jQuery -->
         <script src="{% static 'profile_static/plugins/jquery/jquery.min.js' %}"></script>
         <!-- Bootstrap -->
@@ -484,6 +489,7 @@
         <script src="{% static 'profile_static/dist/js/demo.js' %}"></script>
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="{% static 'profile_static/dist/js/pages/dashboard3.js' %}"></script>
+
 </body>
 
 </html>
