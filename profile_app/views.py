@@ -17,7 +17,7 @@ from django.db.models import Sum
 
 
 # models.......
-from .models import Fund,DirectIncome,LevelIncome,FundTransferHistory,DirectIncome,PurchasedPackages,AllRoiIncome,AllRoiOnRoiIncome
+from .models import Fund,DirectIncome,LevelIncome,FundTransferHistory,DirectIncome,PurchasedPackages,AllRoiIncome,AllRoiOnRoiIncome,Withdrawal
 from Accounts.models import Account
 
 
@@ -261,7 +261,7 @@ def activate(request):
 
     except Exception as e:
         print(e)
-        messages.error(request,str(e))
+        messages.error(request,"User Not Found!!")
         return redirect('activate')
 
     d = {
@@ -442,8 +442,8 @@ def RoiBoosterIncome(request):
         'users':users,
         'roi_income':roi_income
     }
-    return render(request,'profile_templates/roiincome.html',d)
-    return render(request, "profile_templates/roiboosterincome.html", context)
+    # return render(request,'profile_templates/roiincome.html',d)
+    return render(request, "profile_templates/roiboosterincome.html", d)
 
 def levelTeam1(request):
     user = request.user
@@ -462,8 +462,6 @@ def levelTeam1(request):
     d = {
         'users':users,
         }
-
-    
 
     return render(request,'profile_templates/levelteam1.html',d)
 
@@ -613,3 +611,23 @@ def levelTeam5(request):
 
     }
     return render(request,'profile_templates/levelteam5.html',d)
+
+def withdrawalHistory(request):
+    user = request.user
+    withdrawalUsers = Withdrawal.objects.filter(user = user)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(withdrawalUsers, 2)
+
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+
+    d = {
+        'users':users,
+        }
+
+    return render(request,'profile_templates/withdrawalhistory.html',d)

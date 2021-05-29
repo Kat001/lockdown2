@@ -207,21 +207,25 @@ def withdrawal(request):
             password = request.POST.get('password')
             u_txn = user.txn_password
             if password == u_txn:
-                api = CoinPaymentsAPI(public_key='4b4f7c51d0583384f082cc6894b40149063f17036da52bd7b7965a18fc53e89d',
+                if float(amount)<=user.refund and float(amount)>=10:
+                    api = CoinPaymentsAPI(public_key='4b4f7c51d0583384f082cc6894b40149063f17036da52bd7b7965a18fc53e89d',
                       private_key='b33162fc07f678eaB1d9aab22e5dc739eDb8a5030a0748e58bd7763F604cA4bd')
-    
-                # res = api.create_withdrawal(amount=amount,currency="TRX",address=walletAddress)
-                # print(res)
+                    res = api.create_withdrawal(amount=amount,currency="TRX",address=walletAddress)
+                    if res['error'] == 'ok':
+                        withdrawal = Withdrawal(user = user,amount=amount)
+                        withdrawal.save()
+                        messages.success(request,'your withdrawal created successfully!!')
+                        return redirect('withdrawal')
+                    else:
+                        pass
+                else:
+                    messages.error(request,'Do not have enough balance to withdrawal!!')
+                    return redirect('withdrawal')
             else:
                 print("this is callled")
                 messages.error(request,'Wrong transection password!!')
                 return redirect('withdrawal')
     except Exception as e:
-        pass
-    # user = request.user
-    # api = CoinPaymentsAPI(public_key='4b4f7c51d0583384f082cc6894b40149063f17036da52bd7b7965a18fc53e89d',
-    #                       private_key='b33162fc07f678eaB1d9aab22e5dc739eDb8a5030a0748e58bd7763F604cA4bd')
-    
-    # res = api.create_withdrawal(amount=2,currency="TRX",address="TLcdvQ48Jk1SueBqiqzkZ6YrRd3RMdqzMY")
-    # print(res)
+        messages.error(request,str(e))
+        return redirect('withdrawal')
     return render(request,'home_templates/withdrawal.html')

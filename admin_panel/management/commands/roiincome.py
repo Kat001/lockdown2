@@ -8,44 +8,11 @@ class Command(BaseCommand):
 
     def send_roi_on_roi(self,roi_obj):
         try:
-            i = 5
-            obj = roi_obj.user
-            while obj.sponsor != None and i!=0:
-                obj = obj.sponsor
-                if obj.is_active1:
-                    if i==5:
-                        income = ((roi_obj.amount*10)/100)
-                        # obj.total_level_income += income
-                        # obj.refund += income
-                        allroionroi_obj = AllRoiOnRoiIncome(user = obj,from_user=roi_obj.user,level='1',income=income,amount=roi_obj.amount)
-                        allroionroi_obj.save()
-                    if i==4:
-                        income = ((roi_obj.amount*10)/100)
-                        # obj.total_level_income += income
-                        # obj.refund += income
-                        allroionroi_obj = AllRoiOnRoiIncome(user = obj,from_user=roi_obj.user,level='2',income=income,amount=roi_obj.amount)
-                        allroionroi_obj.save()
-                    if i==3:
-                        income = ((roi_obj.amount*10)/100)
-                        # obj.total_level_income += income
-                        # obj.refund += income
-                        allroionroi_obj = AllRoiOnRoiIncome(user = obj,from_user=roi_obj.user,level='3',income=income,amount=roi_obj.amount)
-                        allroionroi_obj.save()
-                    if i==2:
-                        income = ((roi_obj.amount*10)/100)
-                        # obj.total_level_income += income
-                        # obj.refund += income
-                        allroionroi_obj = AllRoiOnRoiIncome(user = obj,from_user=roi_obj.user,level='4',income=income,amount=roi_obj.amount)
-                        allroionroi_obj.save()
-                    if i==1:
-                        income = ((roi_obj.amount*10)/100)
-                        # obj.total_level_income += income
-                        # obj.refund += income
-                        allroionroi_obj = AllRoiOnRoiIncome(user = obj,from_user=roi_obj.user,level='5',income=income,amount=roi_obj.amount)
-                        allroionroi_obj.save()
-                                
-                else:
-                    i = i - 1        
+         sponsor_obj = roi_obj.user.sponsor
+         income = (roi_obj.amount*1)/100
+         obj = AllRoiOnRoiIncome(user=sponsor_obj,from_user=roi_obj.user,amount=roi_obj.amount,income=income)
+         sponsor_obj.refund += income
+         obj.save()       
         except exception as e:
             print(e)
 
@@ -60,9 +27,12 @@ class Command(BaseCommand):
                     package.day1 = False
                     package.days -= 1
                     package.total_income += ((package.amount*10)/100)
+                    user = package.user
+                    user.refund += ((package.amount*10)/100)
+                    user.save()
                     package.save()
                     roi_obj.save()
-                    # self.send_roi_on_roi(roi_obj)
+                    self.send_roi_on_roi(roi_obj)
                 
                 else:
                     # Income If User has not Withdrawaled any money
@@ -72,9 +42,12 @@ class Command(BaseCommand):
                             roi_obj = AllRoiIncome(user = package.user,amount = income, package_amount = package.amount)
                             package.total_income += income
                             package.days -= 1
+                            user = package.user
+                            user.refund += income
+                            user.save()
                             package.save()
                             roi_obj.save()
-                            # self.send_roi_on_roi(roi_obj)
+                            self.send_roi_on_roi(roi_obj)
 
                         else:
                             pass
@@ -85,14 +58,15 @@ class Command(BaseCommand):
                             roi_obj = AllRoiIncome(user = package.user,amount = income, package_amount = package.amount)
                             package.total_income += income
                             package.days -= 1
+                            user = package.user
+                            user.refund += income
+                            user.save()
                             package.save()
                             roi_obj.save()
-                            # self.send_roi_on_roi(roi_obj)
+                            self.send_roi_on_roi(roi_obj)
                         else:
                             pass
             
-                
-
         except Exception as e:
             pass
         

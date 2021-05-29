@@ -66,7 +66,7 @@ class AllRoiIncome(models.Model):
 
 class AllRoiOnRoiIncome(models.Model):
     user  = models.ForeignKey(Account, on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateField(auto_now_add=True)
     from_user = models.ForeignKey(Account, on_delete=models.CASCADE,related_name="FromUser")
     amount = models.FloatField(default=0)
     income = models.FloatField(default=0)
@@ -115,7 +115,7 @@ class Withdrawal(models.Model):
     status = models.BooleanField(default=True)
 
     def __str__(self):
-        return user.username
+        return self.user.username
 
 
 

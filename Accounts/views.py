@@ -50,6 +50,8 @@ def signup(request):
                 #obj.downline = u_name
 
                 user.save()
+                fund = Fund(user = user)
+                fund.save()
                 
                 request.session['user_name'] = u_name
                 request.session['spn'] = spn_obj.username

@@ -51,12 +51,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">My Roi Team</h1>
+                <h1 class="m-0">Direct Income</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Roi Income</li>
+                    <li class="breadcrumb-item active">Direct Income</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -64,7 +64,11 @@
 </div>
 <!-- /.content-header -->
 <!-- Main content -->
+
+
+
 <div class="col-lg-10 mx-auto">
+
     <div class="card-body p-5 bg-white rounded">
         <div class="table-responsive">
             <table id="example" style="width:100%" class="table table-striped table-bordered">
@@ -72,9 +76,9 @@
                     <tr>
                         <th>Sr No.</th>
                         <th>Date</th>
-                        <th>Username</th>
-                        <th>Income</th>
-                        <th>From Income</th>
+                        <th>User</th>
+                        <th>amount</th>
+                        <th>Status</th>>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,8 +88,12 @@
                         <td>{{forloop.counter}}</td>
                         <td>{{user.date}}</td>
                         <td>{{user.user.username}}</td>
-                        <td>{{user.income}}</td>
                         <td>{{user.amount}}</td>
+                        {% if user.status %}
+                        <td>Paid</td>
+                        {% else %}
+                        <td>Failed</td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
 
@@ -104,8 +112,8 @@
                 {% for num in users.paginator.page_range %}
                 {% if users.number == num %}
                 <span class="pagination-number pagination-current">{{ num }}</span>
-                {% elif num > users.number|add:'-3' and num < users.number|add:'3' %} <a class="pagination-number"
-                    href="?page={{ num }}">{{ num }}</a>
+                {% elif num > users.number|add:'-3' and num < users.number|add:'3' %}
+                <a class="pagination-number" href="?page={{ num }}">{{ num }}</a>
                 {% endif %}
                 {% endfor %}
                 {% if users.has_next %}

@@ -30,4 +30,7 @@ urlpatterns = [
    path('roi-income/',views.RoiIncome,name='roiincome'),
    path('roi-booster-income/',views.RoiBoosterIncome,name='roiboosterincome'),
 
+   # Withdrawal History.......
+   path('withdrawal-history/',views.withdrawalHistory,name='withdrawalhistory')
+
 ]
