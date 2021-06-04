@@ -45,6 +45,7 @@ class Account(AbstractBaseUser):
 	total_level_income      = models.FloatField(default=0)
 	withdrawal_amount       = models.FloatField(default=0)
 	total_roi_income        = models.FloatField(default=0)
+	spn_roi_income          = models.FloatField(default=0)
 	total_direct_income     = models.FloatField(default=0)
 	activation_amount       = models.FloatField(default=0)
 	refund			        = models.FloatField(default=0)

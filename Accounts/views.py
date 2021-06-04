@@ -36,7 +36,7 @@ def signup(request):
                 spn_obj = Account.objects.get(username=sponsor)
                 while True:
                     rand_num = random.randint(500000,599999)
-                    u_name = 'LDM' + str(rand_num)
+                    u_name = 'FI' + str(rand_num)
                     if Account.objects.filter(username=u_name).exists():
                         pass
                     else:
@@ -104,7 +104,7 @@ def signup2(request,username):
             spn_obj = Account.objects.get(username=sponsor)
             while True:
                 rand_num = random.randint(500000, 599999)
-                u_name = 'LDM' + str(rand_num)
+                u_name = 'FI' + str(rand_num)
                 if Account.objects.filter(username=u_name).exists():
                     pass
                 else:

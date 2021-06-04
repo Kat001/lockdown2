@@ -12,6 +12,7 @@ class Command(BaseCommand):
          income = (roi_obj.amount*1)/100
          obj = AllRoiOnRoiIncome(user=sponsor_obj,from_user=roi_obj.user,amount=roi_obj.amount,income=income)
          sponsor_obj.refund += income
+         sponsor_obj.spn_roi_income += income
          obj.save()       
         except exception as e:
             print(e)
