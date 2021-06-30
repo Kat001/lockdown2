@@ -30,12 +30,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'gunicorn',
-
     'Accounts',
     'profile_app',
     'payment',
     'django_coinpayments',
-    'paymentgateway',
+
     'home',
 
     'admin_panel',
@@ -61,8 +60,8 @@ AUTH_USER_MODEL = 'Accounts.Account'
 
 SITE_ID = 1
 
-COINPAYMENTS_API_KEY = '4b4f7c51d0583384f082cc6894b40149063f17036da52bd7b7965a18fc53e89d'
-COINPAYMENTS_API_SECRET = 'b33162fc07f678eaB1d9aab22e5dc739eDb8a5030a0748e58bd7763F604cA4bd'
+COINPAYMENTS_API_KEY = '01ab18116c9a9cb8b499976884659daa173699dd9fbe7ef36c14c0aaa6841d59'
+COINPAYMENTS_API_SECRET = 'e5c67025c01dF3dBc1Be66a51e22333CAD16d79B294922cB1b0a88513b6c9eec'
 
 
 

@@ -33,11 +33,11 @@ class ExamplePaymentForm(forms.ModelForm):
 def create_tx(request, payment,amt):
     context = {}
     try:
-        tx = payment.create_tx()
+        tx = payment.create_tx(buyer_email='finder@gmail.com',)
         print(tx, type(tx))
 
-        api = CoinPaymentsAPI(public_key='4b4f7c51d0583384f082cc6894b40149063f17036da52bd7b7965a18fc53e89d',
-                              private_key='b33162fc07f678eaB1d9aab22e5dc739eDb8a5030a0748e58bd7763F604cA4bd')
+        api = CoinPaymentsAPI(public_key='01ab18116c9a9cb8b499976884659daa173699dd9fbe7ef36c14c0aaa6841d59',
+                              private_key='e5c67025c01dF3dBc1Be66a51e22333CAD16d79B294922cB1b0a88513b6c9eec')
 
         payment.status = Payment.PAYMENT_STATUS_PENDING
         payment.save()
@@ -100,8 +100,8 @@ def create_new_payment(request, pk):
 
 
 def index(request):
-    pub_key = '4b4f7c51d0583384f082cc6894b40149063f17036da52bd7b7965a18fc53e89d'
-    pri_key = 'b33162fc07f678eaB1d9aab22e5dc739eDb8a5030a0748e58bd7763F604cA4bd'
+    pub_key = '01ab18116c9a9cb8b499976884659daa173699dd9fbe7ef36c14c0aaa6841d59'
+    pri_key = 'e5c67025c01dF3dBc1Be66a51e22333CAD16d79B294922cB1b0a88513b6c9eec'
 
     client = CryptoPayments(pub_key, pri_key,)
 
@@ -167,8 +167,8 @@ def cheak(request):
     i = 0
     i = i+1
 
-    api = CoinPaymentsAPI(public_key='4b4f7c51d0583384f082cc6894b40149063f17036da52bd7b7965a18fc53e89d',
-                          private_key='b33162fc07f678eaB1d9aab22e5dc739eDb8a5030a0748e58bd7763F604cA4bd')
+    api = CoinPaymentsAPI(public_key='01ab18116c9a9cb8b499976884659daa173699dd9fbe7ef36c14c0aaa6841d59',
+                          private_key='e5c67025c01dF3dBc1Be66a51e22333CAD16d79B294922cB1b0a88513b6c9eec')
 
     k = api.get_tx_info(txid=tx_id)
     d1 = k['result']
@@ -208,8 +208,8 @@ def withdrawal(request):
             u_txn = user.txn_password
             if password == u_txn:
                 if float(amount)<=user.refund and float(amount)>=10:
-                    api = CoinPaymentsAPI(public_key='4b4f7c51d0583384f082cc6894b40149063f17036da52bd7b7965a18fc53e89d',
-                      private_key='b33162fc07f678eaB1d9aab22e5dc739eDb8a5030a0748e58bd7763F604cA4bd')
+                    api = CoinPaymentsAPI(public_key='01ab18116c9a9cb8b499976884659daa173699dd9fbe7ef36c14c0aaa6841d59',
+                      private_key='e5c67025c01dF3dBc1Be66a51e22333CAD16d79B294922cB1b0a88513b6c9eec')
                     res = api.create_withdrawal(amount=amount,currency="TRX",address=walletAddress)
                     if res['error'] == 'ok':
                         withdrawal = Withdrawal(user = user,amount=amount,address=walletAddress)

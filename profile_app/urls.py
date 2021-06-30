@@ -11,7 +11,7 @@ urlpatterns = [
    
 
    # Activation urls................
-   path('add-fund/',include('paymentgateway.urls')),
+   path('add-fund/',include('payment.urls'),),
    path('activate-id/',views.activate,name='activate'),
    path('transfer-fund/',views.fundTransfer,name='fundtransfer'),
    path('transfer-fund-history/',views.fundTransferHistory,name='fundtransferhistory'),
