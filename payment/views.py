@@ -17,7 +17,7 @@ from json import dumps
 import time
 from Accounts.models import Account
 from profile_app.models import Fund
-from profile_app.models import Withdrawal
+from profile_app.models import Withdrawal,PurchasedPackages
 
 
 import ssl
@@ -202,6 +202,7 @@ def withdrawal(request):
     user = request.user
     try:
         if request.method == 'POST':
+            package = PurchasedPackages.objects.get(user=user)
             walletAddress = request.POST.get('walletAddress')
             amount = request.POST.get('amount')
             password = request.POST.get('password')
@@ -214,6 +215,8 @@ def withdrawal(request):
                     if res['error'] == 'ok':
                         withdrawal = Withdrawal(user = user,amount=amount,address=walletAddress)
                         withdrawal.save()
+                        package.is_withdrawal = True
+                        package.save()
                         messages.success(request,'your withdrawal created successfully!!')
                         return redirect('withdrawal')
                     else:
