@@ -174,3 +174,9 @@ MESSAGE_TAGS = {
 # AWS_S3_REGION_NAME = 'us-west-2'
 # AWS_S3_FILE_OVERWRITE = False
 # AWS_DEFAULT_A
+
+
+if os.getcwd() == '/app':
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARD_PROTO','https')
+    SECURE_SSL_REDIRECT = True
+    DEBUG = False
