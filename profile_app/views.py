@@ -210,13 +210,13 @@ def activate(request):
                                     levelIncome_obj = LevelIncome(user = obj,level='1',amount=income,activated_user=activated_obj)
                                     levelIncome_obj.save()
                                 if i==4:
-                                    income = (int(price)*2/100)
+                                    income = (int(price)*5/100)
                                     obj.total_level_income += income
                                     obj.refund += income
                                     levelIncome_obj = LevelIncome(user = obj,level='2',amount=income,activated_user=activated_obj)
                                     levelIncome_obj.save()
                                 if i==3:
-                                    income = (int(price)*1/100)
+                                    income = (int(price)*2/100)
                                     obj.total_level_income += income
                                     obj.refund += income
                                     levelIncome_obj = LevelIncome(user = obj,level='3',amount=income,activated_user=activated_obj)
