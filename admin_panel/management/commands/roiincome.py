@@ -13,7 +13,8 @@ class Command(BaseCommand):
          obj = AllRoiOnRoiIncome(user=sponsor_obj,from_user=roi_obj.user,amount=roi_obj.amount,income=income)
          sponsor_obj.refund += income
          sponsor_obj.spn_roi_income += income
-         obj.save()       
+         obj.save()  
+         sponsor_obj.save()     
         except exception as e:
             print(e)
 
@@ -30,6 +31,7 @@ class Command(BaseCommand):
                     package.total_income += ((package.amount*10)/100)
                     user = package.user
                     user.refund += ((package.amount*10)/100)
+                    user.total_roi_income += ((package.amount*10)/100)
                     user.save()
                     package.save()
                     roi_obj.save()
@@ -45,6 +47,7 @@ class Command(BaseCommand):
                             package.days -= 1
                             user = package.user
                             user.refund += income
+                            user.total_roi_income += income
                             user.save()
                             package.save()
                             roi_obj.save()
@@ -61,6 +64,7 @@ class Command(BaseCommand):
                             package.days -= 1
                             user = package.user
                             user.refund += income
+                            user.total_roi_income += income
                             user.save()
                             package.save()
                             roi_obj.save()

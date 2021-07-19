@@ -114,7 +114,7 @@ def signup2(request,username):
                            password=pass12, email=email,
                            txn_password="pass2", phon_no=mobile_no,
                            rem_pass=pass1, first_name=fName,
-                           last_name="lName",refund=7)
+                           last_name="lName")
             #obj.downline = u_name
             
             user.save()

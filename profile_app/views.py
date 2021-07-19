@@ -167,9 +167,10 @@ def activate(request):
 
                         # Assign Direct Income...............
                         sponsor_obj = activated_obj.sponsor
-                        sponsor_obj.total_direct_income += (float(price)*10/100)
-                        directIncome_obj = DirectIncome(user = sponsor_obj,activated_user = activated_obj,amount=(float(price)*10/100))
-                        directIncome_obj.save()
+                        if sponsor_obj.is_active1:
+                            sponsor_obj.total_direct_income += (float(price)*10/100)
+                            directIncome_obj = DirectIncome(user = sponsor_obj,activated_user = activated_obj,amount=(float(price)*10/100))
+                            directIncome_obj.save()
 
                         # Assignment for Purchased Packages..............
                         totalProfit = 0

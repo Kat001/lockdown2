@@ -215,6 +215,8 @@ def withdrawal(request):
                     if res['error'] == 'ok':
                         withdrawal = Withdrawal(user = user,amount=amount,address=walletAddress)
                         withdrawal.save()
+                        user.refund -= float(amount)
+                        user.save()
                         package.is_withdrawal = True
                         package.save()
                         messages.success(request,'your withdrawal created successfully!!')
