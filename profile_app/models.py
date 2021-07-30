@@ -5,7 +5,7 @@ from Accounts.models import Account
 
 class Fund(models.Model):
     user = models.OneToOneField(Account,on_delete=models.CASCADE)
-    available_fund = models.IntegerField(default=0)
+    available_fund = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.user.username
