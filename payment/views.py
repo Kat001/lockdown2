@@ -211,7 +211,7 @@ def withdrawal(request):
                 if float(amount)<=user.refund and float(amount)>=10:
                     api = CoinPaymentsAPI(public_key='01ab18116c9a9cb8b499976884659daa173699dd9fbe7ef36c14c0aaa6841d59',
                       private_key='e5c67025c01dF3dBc1Be66a51e22333CAD16d79B294922cB1b0a88513b6c9eec')
-                    res = api.create_withdrawal(amount=amount,currency="TRX",address=walletAddress,auto_confirm=1)
+                    res = api.create_withdrawal(amount=amount,currency="TRX",address=walletAddress)
                     if res['error'] == 'ok':
                         withdrawal = Withdrawal(user = user,amount=amount,address=walletAddress)
                         withdrawal.save()
