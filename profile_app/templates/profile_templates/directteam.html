@@ -77,6 +77,7 @@
             <th>Sr No.</th>
             <th>Username</th>
             <th>Members Name</th>
+            <th>Mob.</th>>
             <th>Registration date</th>
             <th>Status</th>
           </tr>
@@ -88,6 +89,7 @@
             <td>{{forloop.counter}}</td>
             <td>{{user.username}}</td>
             <td>{{user.first_name}} {{user.last_name}}</td>
+            <td>{{user.phon_no}}</td>
             <td>{{user.date_joined}}</td>
             {% if user.is_active1 == True %}
             <td class="field-is_active1"><img src="/static/admin/img/icon-yes.svg" alt="True">

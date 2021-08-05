@@ -367,6 +367,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                {% if not user.is_superuser %}
                                 <li class="nav-item">
                                     <a href="{% url 'withdrawal' %}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
@@ -379,6 +380,17 @@
                                         <p>Withdrawal History</p>
                                     </a>
                                 </li>
+                                {% endif %}
+                                {% if user.is_superuser%}
+                                
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Withdrawal Requests</p>
+                                    </a>
+                                </li>
+                                
+                                {% endif%}
 
                             </ul>
                         </li>

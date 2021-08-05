@@ -277,7 +277,7 @@ def directTeam(request):
     user = request.user
     directUsers = Account.objects.filter(sponsor = user)
     page = request.GET.get('page', 1)
-    paginator = Paginator(directUsers, 2)
+    paginator = Paginator(directUsers, 10)
 
     try:
         users = paginator.page(page)
@@ -367,7 +367,7 @@ def directIncome(request):
     direct_income = DirectIncome.objects.filter(user = user)
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(direct_income, 2)
+    paginator = Paginator(direct_income, 10)
 
     try:
         users = paginator.page(page)
@@ -387,7 +387,7 @@ def levelIncome(request):
     direct_income = LevelIncome.objects.filter(user = user)
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(direct_income, 2)
+    paginator = Paginator(direct_income, 10)
 
     try:
         users = paginator.page(page)
@@ -408,7 +408,7 @@ def RoiIncome(request):
     roi_income = AllRoiIncome.objects.filter(user = user)
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(roi_income, 2)
+    paginator = Paginator(roi_income, 10)
 
     try:
         users = paginator.page(page)
@@ -429,7 +429,7 @@ def RoiBoosterIncome(request):
     roi_income = AllRoiOnRoiIncome.objects.filter(user = user)
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(roi_income, 2)
+    paginator = Paginator(roi_income, 10)
 
     try:
         users = paginator.page(page)
@@ -450,7 +450,7 @@ def levelTeam1(request):
     user = request.user
     directUsers = Account.objects.filter(sponsor = user)
     page = request.GET.get('page', 1)
-    paginator = Paginator(directUsers, 2)
+    paginator = Paginator(directUsers, 10)
 
     try:
         users = paginator.page(page)
@@ -480,7 +480,7 @@ def levelTeam2(request):
     objs = Account.objects.filter(id__in=l)
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(objs, 2)
+    paginator = Paginator(objs, 10)
 
     try:
         users = paginator.page(page)
@@ -513,7 +513,7 @@ def levelTeam3(request):
                 l.append(i.id)
     objs = Account.objects.filter(id__in=l)
     page = request.GET.get('page', 1)
-    paginator = Paginator(objs, 2)
+    paginator = Paginator(objs, 10)
 
     try:
         users = paginator.page(page)
@@ -551,7 +551,7 @@ def levelTeam4(request):
     objs = Account.objects.filter(id__in=l)
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(objs, 2)
+    paginator = Paginator(objs, 10)
 
     try:
         users = paginator.page(page)
@@ -593,7 +593,7 @@ def levelTeam5(request):
     objs = Account.objects.filter(id__in=l)
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(objs, 2)
+    paginator = Paginator(objs, 10)
 
     try:
         users = paginator.page(page)
@@ -617,7 +617,7 @@ def withdrawalHistory(request):
     user = request.user
     withdrawalUsers = Withdrawal.objects.filter(user = user)
     page = request.GET.get('page', 1)
-    paginator = Paginator(withdrawalUsers, 2)
+    paginator = Paginator(withdrawalUsers, 10)
 
     try:
         users = paginator.page(page)
@@ -632,3 +632,19 @@ def withdrawalHistory(request):
         }
 
     return render(request,'profile_templates/withdrawalhistory.html',d)
+
+@login_required
+def WithdrawalAdmin(request):
+    user = request.user
+
+    if user.is_superuser:
+        withdrawalUsers = Withdrawal.objects.all()
+
+    else:
+        withdrawalUsers = []
+
+    d = {
+        'objs' : withdrawalUsers
+    }
+    
+    return render(request,'profile_templates/all_withrawal_request.html',d)
