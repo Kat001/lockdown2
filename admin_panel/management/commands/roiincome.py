@@ -21,56 +21,69 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         try:
             packages = PurchasedPackages.objects.all()
-            
             for package in packages:
-                # Day1 Income...................
-                if package.day1:
-                    roi_obj = AllRoiIncome(user = package.user,amount = ((package.amount*10)/100), package_amount = package.amount)
-                    package.day1 = False
-                    package.days -= 1
-                    package.total_income += ((package.amount*10)/100)
+                if package.days > 0:
+                    income = (package.amount*4)/100
+                    income_obj = AllRoiIncome(user=package.user,amount=income,package_amount=package.amount)
                     user = package.user
-                    user.refund += ((package.amount*10)/100)
-                    user.total_roi_income += ((package.amount*10)/100)
+                    user.total_roi_income += income
+                    package.refund += income
+                    income_obj.save()
                     user.save()
-                    package.save()
-                    roi_obj.save()
-                    self.send_roi_on_roi(roi_obj)
-                
-                else:
-                    # Income If User has not Withdrawaled any money
-                    if package.is_withdrawal == False:
-                        if package.days > 0:
-                            income = (package.total_income*10)/100
-                            roi_obj = AllRoiIncome(user = package.user,amount = income, package_amount = package.amount)
-                            package.total_income += income
-                            package.days -= 1
-                            user = package.user
-                            user.refund += income
-                            user.total_roi_income += income
-                            user.save()
-                            package.save()
-                            roi_obj.save()
-                            self.send_roi_on_roi(roi_obj)
+                    self.send_roi_on_roi(income_obj)
 
-                        else:
-                            pass
-                    else:
-                        # Income after first Withdarawl..............
-                        if package.days > 0:
-                            income = (package.amount*1)/100
-                            roi_obj = AllRoiIncome(user = package.user,amount = income, package_amount = package.amount)
-                            package.total_income += income
-                            package.days -= 1
-                            user = package.user
-                            user.refund += income
-                            user.total_roi_income += income
-                            user.save()
-                            package.save()
-                            roi_obj.save()
-                            self.send_roi_on_roi(roi_obj)
-                        else:
-                            pass
+    # def handle(self, *args, **kwargs):
+    #     try:
+    #         packages = PurchasedPackages.objects.all()
+            
+    #         for package in packages:
+    #             # Day1 Income...................
+    #             if package.day1:
+    #                 roi_obj = AllRoiIncome(user = package.user,amount = ((package.amount*10)/100), package_amount = package.amount)
+    #                 package.day1 = False
+    #                 package.days -= 1
+    #                 package.total_income += ((package.amount*10)/100)
+    #                 user = package.user
+    #                 user.refund += ((package.amount*10)/100)
+    #                 user.total_roi_income += ((package.amount*10)/100)
+    #                 user.save()
+    #                 package.save()
+    #                 roi_obj.save()
+    #                 self.send_roi_on_roi(roi_obj)
+                
+    #             else:
+    #                 # Income If User has not Withdrawaled any money
+    #                 if package.is_withdrawal == False:
+    #                     if package.days > 0:
+    #                         income = (package.total_income*10)/100
+    #                         roi_obj = AllRoiIncome(user = package.user,amount = income, package_amount = package.amount)
+    #                         package.total_income += income
+    #                         package.days -= 1
+    #                         user = package.user
+    #                         user.refund += income
+    #                         user.total_roi_income += income
+    #                         user.save()
+    #                         package.save()
+    #                         roi_obj.save()
+    #                         self.send_roi_on_roi(roi_obj)
+    #                     else:
+    #                         pass
+    #                 else:
+    #                     # Income after first Withdarawl..............
+    #                     if package.days > 0:
+    #                         income = (package.amount*1)/100
+    #                         roi_obj = AllRoiIncome(user = package.user,amount = income, package_amount = package.amount)
+    #                         package.total_income += income
+    #                         package.days -= 1
+    #                         user = package.user
+    #                         user.refund += income
+    #                         user.total_roi_income += income
+    #                         user.save()
+    #                         package.save()
+    #                         roi_obj.save()
+    #                         self.send_roi_on_roi(roi_obj)
+    #                     else:
+    #                         pass
             
         except Exception as e:
             pass

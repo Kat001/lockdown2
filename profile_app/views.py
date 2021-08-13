@@ -195,7 +195,7 @@ def activate(request):
                             days = 200
 
 
-                        purchasedpackages = PurchasedPackages(user = activated_obj,amount = int(price),days = days)
+                        purchasedpackages = PurchasedPackages(user = activated_obj,amount = int(price),days = 60)
                         purchasedpackages.save()
 
                         # Assign Level Income................
