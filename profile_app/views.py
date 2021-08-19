@@ -205,7 +205,7 @@ def activate(request):
                             obj = obj.sponsor
                             if obj.is_active1:
                                 if i==5:
-                                    income = (int(price)*10/100)
+                                    income = (int(price)*15/100)
                                     obj.total_level_income += income
                                     obj.refund += income
                                     levelIncome_obj = LevelIncome(user = obj,level='1',amount=income,activated_user=activated_obj)
