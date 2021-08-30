@@ -9,7 +9,7 @@ class Command(BaseCommand):
     def send_roi_on_roi(self,roi_obj):
         try:
          sponsor_obj = roi_obj.user.sponsor
-         income = (roi_obj.amount*1)/100
+         income = (roi_obj.amount*10)/100
          obj = AllRoiOnRoiIncome(user=sponsor_obj,from_user=roi_obj.user,amount=roi_obj.amount,income=income)
          sponsor_obj.refund += income
          sponsor_obj.spn_roi_income += income
@@ -21,16 +21,19 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         try:
             packages = PurchasedPackages.objects.all()
+            print(packages)
             for package in packages:
                 if package.days > 0:
                     income = (package.amount*4)/100
                     income_obj = AllRoiIncome(user=package.user,amount=income,package_amount=package.amount)
                     user = package.user
                     user.total_roi_income += income
-                    package.refund += income
+                    user.refund += income
                     income_obj.save()
                     user.save()
                     self.send_roi_on_roi(income_obj)
+        except Exception as e:
+            print(e)
 
     # def handle(self, *args, **kwargs):
     #     try:
